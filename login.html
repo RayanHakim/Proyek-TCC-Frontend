@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Dealer Mobil Bekas</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="form-header">
+        
+     
+                </a>
+                <div class="logo">
+                    <h1>Maiza Auto</h1>
+                    <p>Dealer Mobil Bekas Terpercaya</p>
+                </div>
+            </div>
+            
+            <div class="form-wrapper">
+                <h2>Masuk ke Akun Anda</h2>
+                <p class="form-subtitle">Silahkan masuk untuk melihat mobil favorit dan riwayat pencarian Anda</p>
+                
+                <form id="login-form" action="#" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="Masukkan email Anda" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Kata Sandi</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" placeholder="Masukkan kata sandi" required>
+                            <i class="fas fa-eye toggle-password" id="toggle-password"></i>
+                        </div>
+                    </div>
+    
+                    
+                    <button type="submit" class="btn-submit">Masuk</button>
+                </form>
+                
+                
+                <div class="register-link">
+                    <p>Belum punya akun? <a href="register.html">Daftar sekarang</a></p>
+                </div>
+            </div>
+        </div>
+        
+
+        <script>
+          // Toggle password visibility
+          document.getElementById('toggle-password').addEventListener('click', function() {
+              const passwordInput = document.getElementById('password');
+              const icon = this;
+      
+              if (passwordInput.type === 'password') {
+                  passwordInput.type = 'text';
+                  icon.classList.remove('fa-eye');
+                  icon.classList.add('fa-eye-slash');
+              } else {
+                  passwordInput.type = 'password';
+                  icon.classList.remove('fa-eye-slash');
+                  icon.classList.add('fa-eye');
+              }
+          });
+      
+          // Login validation
+          document.getElementById('login-form').addEventListener('submit', function(e) {
+              e.preventDefault(); // Mencegah form submit ke server
+      
+              const email = document.getElementById('email').value;
+              const password = document.getElementById('password').value;
+      
+              if (email === 'admin' && password === '123') {
+                  alert('Login berhasil!');
+                  window.location.href = 'home.html'; // Arahkan ke halaman home
+              } else {
+                  alert('Email atau kata sandi salah!');
+              }
+          });
+      </script>
+      
+</body>
+</html>

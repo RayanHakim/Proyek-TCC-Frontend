@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Mobil Bekas - Pilih Kategori</title>
+    <link rel="stylesheet" href="css/kategori.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Dealer Mobil Bekas Terpercaya</h1>
+            <p>Temukan mobil impian Anda dengan harga terbaik</p>
+            <!-- Tombol kembali ke home.html -->
+            <a href="home.html" class="back-button">← Kembali ke Beranda</a>
+        </div>
+    </header>
+
+    <div class="filter-container">
+        <h2>Pilih Kategori Mobil</h2>
+        <div class="filter-options">
+            <div class="filter-group">
+                <h3>Merek</h3>
+                <div class="options">
+                    <button class="filter-btn" data-type="brand" data-value="toyota">Toyota</button>
+                    <button class="filter-btn" data-type="brand" data-value="honda">Honda</button>
+                    <button class="filter-btn" data-type="brand" data-value="bmw">BMW</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Model</h3>
+                <div class="options">
+                    <button class="filter-btn" data-type="model" data-value="sedan">Sedan</button>
+                    <button class="filter-btn" data-type="model" data-value="suv">SUV</button>
+                    <button class="filter-btn" data-type="model" data-value="hatchback">Hatchback</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Tahun</h3>
+                <div class="options">
+                    <button class="filter-btn" data-type="year" data-value="terbaru">Terbaru</button>
+                    <button class="filter-btn" data-type="year" data-value="menengah">Menengah</button>
+                    <button class="filter-btn" data-type="year" data-value="tua">Tua</button>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <h3>Harga</h3>
+                <div class="options">
+                    <button class="filter-btn" data-type="price" data-value="ekonomis">Ekonomis</button>
+                    <button class="filter-btn" data-type="price" data-value="menengah">Menengah</button>
+                    <button class="filter-btn" data-type="price" data-value="premium">Premium</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="active-filters">
+            <h3>Filter Aktif:</h3>
+            <div id="selected-filters"></div>
+            <button id="reset-filters">Reset Filter</button>
+        </div>
+    </div>
+
+    <div class="car-container">
+        <h2>Hasil Pencarian</h2>
+        <div id="car-results" class="car-results">
+            <!-- Mobil akan ditampilkan di sini dari JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Data mobil (contoh)
+        const cars = [
+            {
+                id: 1,
+                name: "Toyota Fortuner",
+                brand: "toyota",
+                model: "suv",
+                year: "menengah",
+                price: "menengah",
+                image: "../image/fortuner.jpg",
+                description: "Toyota Fortuner 2018, kondisi terawat, km rendah",
+                details: "Tahun 2018 • 45.000 km • 2.4L • Rp 400 juta"
+            },
+            {
+                id: 2,
+                name: "Honda Civic",
+                brand: "honda",
+                model: "sedan",
+                year: "terbaru",
+                price: "premium",
+                image: "../image/civic.jpg",
+                description: "Honda Civic Turbo 2022, fitur lengkap",
+                details: "Tahun 2022 • 15.000 km • 1.5L Turbo • Rp 600 juta"
+            },
+            {
+                id: 3,
+                name: "BMW X5",
+                brand: "bmw",
+                model: "suv",
+                year: "terbaru",
+                price: "premium",
+                image: "../image/x5.jpg",
+                description: "BMW X5 2023, interior mewah, fitur lengkap",
+                details: "Tahun 2023 • 8.000 km • 3.0L • Rp 1.2 milyar"
+            },
+            {
+                id: 4,
+                name: "Toyota Yaris",
+                brand: "toyota",
+                model: "hatchback",
+                year: "tua",
+                price: "ekonomis",
+                image: "../image/yaris.jpg",
+                description: "Toyota Yaris 2010, irit bahan bakar",
+                details: "Tahun 2014 • 32.000 km • 1.5L • Rp 180 juta"
+            },
+            {
+                id: 5,
+                name: "Honda Jazz",
+                brand: "honda",
+                model: "hatchback",
+                year: "tua",
+                price: "ekonomis",
+                image: "../image/jazz.jpg",
+                description: "Honda Jazz RS 2015, sporty dan irit",
+                details: "Tahun 2015 • 25.000 km • 1.5L • Rp 195 juta"
+            },
+            {
+                id: 6,
+                name: "BMW E36",
+                brand: "bmw",
+                model: "sedan",
+                year: "tua",
+                price: "ekonomis",
+                image: "../image/e36.jpg",
+                description: "BMW E36 1999, kondisi terawat",
+                details: "Tahun 1999 • 78.000 km • 2.0L • Rp 100 juta"
+            },
+            {
+                id: 7,
+                name: "Toyota Camry",
+                brand: "toyota",
+                model: "sedan",
+                year: "terbaru",
+                price: "premium",
+                image: "../image/camry.jpg",
+                description: "Toyota Camry Hybrid 2022, fitur mewah",
+                details: "Tahun 2022 • 12.000 km • 2.5L Hybrid • Rp 650 juta"
+            },
+            {
+                id: 8,
+                name: "Honda HR-V",
+                brand: "honda",
+                model: "suv",
+                year: "menengah",
+                price: "menengah",
+                image: "../image/hrv.jpg",
+                description: "Honda HR-V 2019, desain modern",
+                details: "Tahun 2019 • 5.000 km • 1.5L • Rp 350 juta"
+            },
+            {
+                id: 9,
+                name: "BMW i3",
+                brand: "bmw",
+                model: "hatchback",
+                year: "menengah",
+                price: "menengah",
+                image: "../image/i3.jpg",
+                description: "BMW i3 2016, mobil listrik hemat energi",
+                details: "Tahun 2016 • 45.000 km • Electric • Rp 370 juta"
+            }
+        ];
+
+        // Filter aktif
+        let activeFilters = {
+            brand: null,
+            model: null,
+            year: null,
+            price: null
+        };
+
+        // Elemen DOM
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const selectedFiltersContainer = document.getElementById('selected-filters');
+        const resetButton = document.getElementById('reset-filters');
+        const carResultsContainer = document.getElementById('car-results');
+
+        // Tambahkan event listener untuk tombol filter
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const type = this.getAttribute('data-type');
+                const value = this.getAttribute('data-value');
+                
+                // Reset tombol dari kategori yang sama
+                document.querySelectorAll(`.filter-btn[data-type="${type}"]`).forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Aktifkan tombol yang dipilih
+                if (activeFilters[type] === value) {
+                    activeFilters[type] = null; // Batalkan filter jika sama
+                } else {
+                    this.classList.add('active');
+                    activeFilters[type] = value; // Set filter baru
+                }
+                
+                updateSelectedFilters();
+                filterCars();
+            });
+        });
+
+        // Reset filter
+        resetButton.addEventListener('click', function() {
+            activeFilters = {
+                brand: null,
+                model: null,
+                year: null,
+                price: null
+            };
+            
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            updateSelectedFilters();
+            filterCars();
+        });
+
+        // Update tampilan filter yang aktif
+        function updateSelectedFilters() {
+            selectedFiltersContainer.innerHTML = '';
+            
+            for (const type in activeFilters) {
+                if (activeFilters[type]) {
+                    const filterTag = document.createElement('span');
+                    filterTag.className = 'filter-tag';
+                    filterTag.innerHTML = `${getTypeName(type)}: ${capitalizeFirstLetter(activeFilters[type])} <button class="remove-filter" data-type="${type}">×</button>`;
+                    selectedFiltersContainer.appendChild(filterTag);
+                }
+            }
+            
+            // Tambahkan event listener untuk tombol hapus filter
+            document.querySelectorAll('.remove-filter').forEach(button => {
+                button.addEventListener('click', function() {
+                    const type = this.getAttribute('data-type');
+                    activeFilters[type] = null;
+                    document.querySelectorAll(`.filter-btn[data-type="${type}"]`).forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    updateSelectedFilters();
+                    filterCars();
+                });
+            });
+        }
+
+        // Filter mobil berdasarkan kriteria yang dipilih
+        function filterCars() {
+            let filteredCars = [...cars];
+            
+            for (const type in activeFilters) {
+                if (activeFilters[type]) {
+                    filteredCars = filteredCars.filter(car => car[type] === activeFilters[type]);
+                }
+            }
+            
+            displayCars(filteredCars);
+        }
+
+        // Tampilkan mobil hasil filter
+        function displayCars(carsToDisplay) {
+    carResultsContainer.innerHTML = '';
+    
+    if (carsToDisplay.length === 0) {
+        carResultsContainer.innerHTML = '<div class="no-results">Tidak ada mobil yang sesuai dengan filter yang dipilih.</div>';
+        return;
+    }
+    
+    carsToDisplay.forEach(car => {
+        const carCard = document.createElement('div');
+        carCard.className = 'car-card';
+        carCard.innerHTML = `
+            <div class="car-image">
+                <img src="${car.image}" alt="${car.name}" onerror="this.src='placeholder.jpg'">
+            </div>
+            <div class="car-info">
+                <h3>${car.name}</h3>
+                <p class="car-description">${car.description}</p>
+                <p class="car-details">${car.details}</p>
+                <button class="detail-btn" data-car-id="${car.id}">Beli Mobil</button>
+            </div>
+        `;
+        carResultsContainer.appendChild(carCard);
+        
+        // Tambahkan event listener untuk tombol beli
+        carCard.querySelector('.detail-btn').addEventListener('click', function() {
+            const carId = this.getAttribute('data-car-id');
+            const selectedCar = cars.find(c => c.id == carId);
+            
+            if (selectedCar) {
+                // Redirect ke halaman beli dengan parameter mobil
+                window.location.href = `beli.html?id=${selectedCar.id}&name=${encodeURIComponent(selectedCar.name)}&description=${encodeURIComponent(selectedCar.description)}&details=${encodeURIComponent(selectedCar.details)}&image=${encodeURIComponent(selectedCar.image)}`;
+            }
+        });
+    });
+}
+
+        // Fungsi helper
+        function getTypeName(type) {
+            const typeNames = {
+                brand: 'Merek',
+                model: 'Model',
+                year: 'Tahun',
+                price: 'Harga'
+            };
+            return typeNames[type] || type;
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Tampilkan semua mobil saat halaman dimuat
+        window.onload = function() {
+            displayCars(cars);
+        };
+    </script>
+</body>
+</html>

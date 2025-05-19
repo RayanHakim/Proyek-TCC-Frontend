@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Mobil Bekas - Profil Pengguna</title>
+    <link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Dealer Mobil Bekas Terpercaya</h1>
+            <p>Profil Pengguna</p>
+            <nav class="main-nav">
+                <a href="home.html">Beranda</a>
+                <a href="kategori.html">Lihat Mobil</a>
+                <a href="user.html" class="active">Akun Saya</a>
+                <button id="logout-btn">Keluar</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="image/e36.jpg" alt="Avatar pengguna" onerror="this.src='image/default-avatar.png'">
+                </div>
+                <h3 id="user-name">Maiza</h3>
+                <p id="user-email">Maiza@email.com</p>
+            </div>
+            <div class="sidebar-menu">
+                <button class="sidebar-btn active" data-section="profile">Profil Saya</button>
+                <button class="sidebar-btn" data-section="purchases">Riwayat Pembelian</button>
+                <button class="sidebar-btn" data-section="settings">Pengaturan Akun</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Bagian Profil -->
+            <section id="profile-section" class="content-section active">
+                <h2>Profil Saya</h2>
+                
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <h3>Data Pribadi</h3>
+                        <button id="edit-profile-btn" class="edit-btn">Edit</button>
+                    </div>
+                    
+                    <div id="profile-view" class="profile-view">
+                        <div class="profile-row">
+                            <span class="label">Nama Lengkap:</span>
+                            <span class="value" id="full-name">Maiza</span>
+                        </div>
+                        <div class="profile-row">
+                            <span class="label">Email:</span>
+                            <span class="value" id="email">Maiza@email.com</span>
+                        </div>
+                        <div class="profile-row">
+                            <span class="label">Nomor Telepon:</span>
+                            <span class="value" id="phone">08123-456-789</span>
+                        </div>
+                        <div class="profile-row">
+                            <span class="label">Alamat:</span>
+                            <span class="value" id="address">Jl.TambakBayan,Jogja</span>
+                        </div>
+                        <div class="profile-row">
+                            <span class="label">Tanggal Lahir:</span>
+                            <span class="value" id="birth-date">30 Februari 2030</span>
+                        </div>
+                    </div>
+                    
+                    <div id="profile-edit" class="profile-edit" style="display: none;">
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="edit-name">Nama Lengkap</label>
+                                <input type="text" id="edit-name" value="Maiza required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-email">Email</label>
+                                <input type="email" id="edit-email" value="Meizza@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-phone">Nomor Telepon</label>
+                                <input type="tel" id="edit-phone" value="0812-3456-7890" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-address">Alamat</label>
+                                <textarea id="edit-address" required>Jln TambakBayan.Jogja</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-birth-date">Tanggal Lahir</label>
+                                <input type="date" id="edit-birth-date" value="2030-05-15" required>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="save-btn">Simpan</button>
+                                <button type="button" id="cancel-edit-btn" class="cancel-btn">Batal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian Riwayat Pembelian -->
+            <section id="purchases-section" class="content-section">
+                <h2>Riwayat Pembelian</h2>
+                
+                <div class="purchases-list">
+                    <!-- Pembelian 1 -->
+                    <div class="purchase-card">
+                        <div class="purchase-header">
+                            <div class="purchase-id">ID: #12345</div>
+                            <div class="purchase-status completed">Selesai</div>
+                        </div>
+                        <div class="purchase-content">
+                            <div class="car-preview">
+                                <img src="image/fortuner.jpg" alt="Toyota Fortuner" onerror="this.src='placeholder.jpg'">
+                            </div>
+                            <div class="purchase-details">
+                                <h3>Toyota Fortuner</h3>
+                                <p class="car-info">Tahun 2018 • 45.000 km • 2.4L • Rp 400 juta</p>
+                                <p class="purchase-date">Tanggal Pembelian: 10 April 2025</p>
+                                <p class="payment-method">Metode Pembayaran: Kredit (36 bulan)</p>
+                            </div>
+                        </div>
+                        <div class="purchase-actions">
+                            <button class="detail-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+
+                    <!-- Pembelian 2 -->
+                    <div class="purchase-card">
+                        <div class="purchase-header">
+                            <div class="purchase-id">ID: #12278</div>
+                            <div class="purchase-status processing">Diproses</div>
+                        </div>
+                        <div class="purchase-content">
+                            <div class="car-preview">
+                                <img src="image/jazz.jpg" alt="Honda Jazz" onerror="this.src='placeholder.jpg'">
+                            </div>
+                            <div class="purchase-details">
+                                <h3>Honda Jazz</h3>
+                                <p class="car-info">Tahun 2015 • 25.000 km • 1.5L • Rp 195 juta</p>
+                                <p class="purchase-date">Tanggal Pembelian: 15 April 2025</p>
+                                <p class="payment-method">Metode Pembayaran: Tunai</p>
+                            </div>
+                        </div>
+                        <div class="purchase-actions">
+                            <button class="detail-btn">Lihat Detail</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bagian Pengaturan Akun -->
+            <section id="settings-section" class="content-section">
+                <h2>Pengaturan Akun</h2>
+                
+                <div class="settings-card">
+                    <h3>Ubah Kata Sandi</h3>
+                    <form id="password-form">
+                        <div class="form-group">
+                            <label for="current-password">Kata Sandi Saat Ini</label>
+                            <input type="password" id="current-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">Kata Sandi Baru</label>
+                            <input type="password" id="new-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Konfirmasi Kata Sandi Baru</label>
+                            <input type="password" id="confirm-password" required>
+                        </div>
+                        <button type="submit" class="save-btn">Simpan Perubahan</button>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Notifikasi</h3>
+                    <div class="notification-settings">
+                        <div class="notification-option">
+                            <div class="notification-info">
+                                <h4>Email Notifikasi</h4>
+                                <p>Terima informasi terbaru dan penawaran khusus melalui email</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="notification-option">
+                            <div class="notification-info">
+                                <h4>SMS Notifikasi</h4>
+                                <p>Terima pemberitahuan tentang status pembelian melalui SMS</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-card danger-zone">
+                    <h3>Hapus Akun</h3>
+                    <p>Barangkali mau hapus akun siapa tahu.</p>
+                    <br>
+                    <button id="delete-account-btn" class="danger-btn">Hapus Akun</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <script>
+        // Navigasi sidebar
+        const sidebarButtons = document.querySelectorAll('.sidebar-btn');
+        const contentSections = document.querySelectorAll('.content-section');
+
+        sidebarButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetSection = this.getAttribute('data-section');
+                
+                // Aktifkan tombol yang diklik
+                sidebarButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Tampilkan bagian yang sesuai
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                    if (section.id === `${targetSection}-section`) {
+                        section.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // Edit profil
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        const profileView = document.getElementById('profile-view');
+        const profileEdit = document.getElementById('profile-edit');
+        const cancelEditBtn = document.getElementById('cancel-edit-btn');
+        const profileForm = document.getElementById('profile-form');
+
+        editProfileBtn.addEventListener('click', function() {
+            profileView.style.display = 'none';
+            profileEdit.style.display = 'block';
+        });
+
+        cancelEditBtn.addEventListener('click', function() {
+            profileView.style.display = 'block';
+            profileEdit.style.display = 'none';
+        });
+
+        profileForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Update profile data
+            document.getElementById('full-name').textContent = document.getElementById('edit-name').value;
+            document.getElementById('email').textContent = document.getElementById('edit-email').value;
+            document.getElementById('phone').textContent = document.getElementById('edit-phone').value;
+            document.getElementById('address').textContent = document.getElementById('edit-address').value;
+            
+            // Format date from YYYY-MM-DD to DD Month YYYY
+            const birthDate = new Date(document.getElementById('edit-birth-date').value);
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById('birth-date').textContent = birthDate.toLocaleDateString('id-ID', options);
+            
+            // Update header
+            document.getElementById('user-name').textContent = document.getElementById('edit-name').value;
+            document.getElementById('user-email').textContent = document.getElementById('edit-email').value;
+            
+            // Hide edit form
+            profileView.style.display = 'block';
+            profileEdit.style.display = 'none';
+            
+            // Show success message (could add a toast/notification here)
+            alert('Profil berhasil diperbarui!');
+        });
+
+        // Modal Detail Pembelian
+        const detailButtons = document.querySelectorAll('.detail-btn');
+        const purchaseDetailModal = document.getElementById('purchase-detail-modal');
+        const closeButtons = document.querySelectorAll('.close-button');
+
+        detailButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Dalam aplikasi nyata, Anda akan mengambil data dari server berdasarkan ID
+                purchaseDetailModal.style.display = 'flex';
+            });
+        });
+
+        // Delete Account Modal
+        const deleteAccountBtn = document.getElementById('delete-account-btn');
+        const confirmDeleteModal = document.getElementById('confirm-delete-modal');
+        const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+        const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+
+        deleteAccountBtn.addEventListener('click', function() {
+            confirmDeleteModal.style.display = 'flex';
+        });
+
+        cancelDeleteBtn.addEventListener('click', function() {
+            confirmDeleteModal.style.display = 'none';
+        });
+
+        confirmDeleteBtn.addEventListener('click', function() {
+            // Dalam aplikasi nyata, Anda akan mengirim permintaan ke server
+            alert('Akun berhasil dihapus');
+            window.location.href = 'home.html';
+        });
+
+        // Close all modals
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                purchaseDetailModal.style.display = 'none';
+                confirmDeleteModal.style.display = 'none';
+            });
+        });
+
+        // Logout
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            // Dalam aplikasi nyata, Anda akan menghapus token/session
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</html>

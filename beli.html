@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Mobil Bekas - Pemesanan</title>
+    <link rel="stylesheet" href="css/beli.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Dealer Mobil Bekas Terpercaya</h1>
+            <p>Form Pemesanan Mobil</p>
+            <a href="kategori.html" class="back-button">← Kembali ke Kategori</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="car-preview">
+            <h2>Mobil Pilihan Anda</h2>
+            <div class="car-details">
+                <div class="car-image">
+                    <img id="selected-car-image" src="placeholder.jpg" alt="Mobil Pilihan">
+                </div>
+                <div class="car-info">
+                    <h3 id="selected-car-name">Nama Mobil</h3>
+                    <p id="selected-car-description">Deskripsi mobil</p>
+                    <p id="selected-car-details">Detail mobil</p>
+                    <p class="price" id="selected-car-price">Harga: -</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-form">
+            <h2>Form Pemesanan</h2>
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="customer-name">Nama Lengkap</label>
+                    <input type="text" id="customer-name" name="customer-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-email">Email</label>
+                    <input type="email" id="customer-email" name="customer-email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="customer-phone">Nomor Telepon</label>
+                    <input type="tel" id="customer-phone" name="customer-phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment-method">Metode Pembayaran</label>
+                    <select id="payment-method" name="payment-method" required>
+                        <option value="">-- Pilih Metode Pembayaran --</option>
+                        <option value="cash">Tunai</option>
+                        <option value="credit">Kredit</option>
+                        <option value="leasing">Leasing</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="credit-options" style="display: none;">
+                    <label for="credit-term">Tenor Kredit</label>
+                    <select id="credit-term" name="credit-term">
+                        <option value="12">12 bulan</option>
+                        <option value="24">24 bulan</option>
+                        <option value="36">36 bulan</option>
+                        <option value="48">48 bulan</option>
+                        <option value="60">60 bulan</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="trade-in">Tukar Tambah</label>
+                    <div class="radio-group">
+                        <input type="radio" id="trade-in-yes" name="trade-in" value="yes">
+                        <label for="trade-in-yes">Ya</label>
+                        <input type="radio" id="trade-in-no" name="trade-in" value="no" checked>
+                        <label for="trade-in-no">Tidak</label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="trade-in-details" style="display: none;">
+                    <label for="trade-in-car">Detail Mobil Tukar Tambah</label>
+                    <textarea id="trade-in-car" name="trade-in-car" placeholder="Merek, model, tahun, dan kondisi mobil Anda saat ini"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Catatan Tambahan</label>
+                    <textarea id="notes" name="notes" placeholder="Masukkan catatan tambahan jika ada"></textarea>
+                </div>
+
+                <div class="form-action">
+                    <button type="submit" class="order-button">Pesan Sekarang</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Dealer Mobil Bekas Terpercaya.</p>
+        </div>
+    </footer>
+
+    <div id="order-confirmation" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Pesanan Berhasil!</h2>
+            <p>Terima kasih telah memesan mobil di dealer kami. Tim kami akan segera menghubungi Anda untuk konfirmasi pembayaran dan jadwal pengambilan mobil.</p>
+            <div class="order-summary">
+                <h3>Ringkasan Pesanan:</h3>
+                <p><strong>Mobil:</strong> <span id="summary-car"></span></p>
+                <p><strong>Nama:</strong> <span id="summary-name"></span></p>
+                <p><strong>Email:</strong> <span id="summary-email"></span></p>
+                <p><strong>Telepon:</strong> <span id="summary-phone"></span></p>
+                <p><strong>Metode Pembayaran:</strong> <span id="summary-payment"></span></p>
+            </div>
+            <button id="back-to-home" class="order-button">Kembali ke Beranda</button>
+        </div>
+    </div>
+
+    <script>
+        // Ambil parameter dari URL untuk mengisi detail mobil
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Set data mobil saat halaman dimuat
+        window.onload = function() {
+            const carId = getQueryParam('id');
+            const carName = getQueryParam('name');
+            const carDescription = getQueryParam('description');
+            const carDetails = getQueryParam('details');
+            const carImage = getQueryParam('image');
+            
+            if (carName) {
+                document.getElementById('selected-car-name').textContent = decodeURIComponent(carName);
+            }
+            
+            if (carDescription) {
+                document.getElementById('selected-car-description').textContent = decodeURIComponent(carDescription);
+            }
+            
+            if (carDetails) {
+                document.getElementById('selected-car-details').textContent = decodeURIComponent(carDetails);
+                
+                // Ekstrak harga dari detail mobil (asumsi format: "... • Rp XXX juta")
+                const priceMatch = decodeURIComponent(carDetails).match(/Rp\s+([\d,\.]+\s+(?:juta|milyar))/);
+                if (priceMatch && priceMatch[1]) {
+                    document.getElementById('selected-car-price').textContent = `Harga: Rp ${priceMatch[1]}`;
+                }
+            }
+            
+            if (carImage) {
+                document.getElementById('selected-car-image').src = decodeURIComponent(carImage);
+            }
+        }
+
+        // Tampilkan/sembunyikan opsi kredit berdasarkan metode pembayaran
+        document.getElementById('payment-method').addEventListener('change', function() {
+            const creditOptions = document.getElementById('credit-options');
+            if (this.value === 'credit' || this.value === 'leasing') {
+                creditOptions.style.display = 'block';
+            } else {
+                creditOptions.style.display = 'none';
+            }
+        });
+
+        // Tampilkan/sembunyikan detail tukar tambah
+        document.querySelectorAll('input[name="trade-in"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                const tradeInDetails = document.getElementById('trade-in-details');
+                if (this.value === 'yes') {
+                    tradeInDetails.style.display = 'block';
+                } else {
+                    tradeInDetails.style.display = 'none';
+                }
+            });
+        });
+
+        // Handle submit form
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Isi ringkasan pesanan
+            document.getElementById('summary-car').textContent = document.getElementById('selected-car-name').textContent;
+            document.getElementById('summary-name').textContent = document.getElementById('customer-name').value;
+            document.getElementById('summary-email').textContent = document.getElementById('customer-email').value;
+            document.getElementById('summary-phone').textContent = document.getElementById('customer-phone').value;
+            
+            const paymentMethod = document.getElementById('payment-method');
+            const paymentText = paymentMethod.options[paymentMethod.selectedIndex].text;
+            document.getElementById('summary-payment').textContent = paymentText;
+            
+            // Tampilkan modal konfirmasi
+            document.getElementById('order-confirmation').style.display = 'flex';
+        });
+
+        // Tutup modal
+        document.querySelector('.close-button').addEventListener('click', function() {
+            document.getElementById('order-confirmation').style.display = 'none';
+        });
+
+        // Kembali ke beranda
+        document.getElementById('back-to-home').addEventListener('click', function() {
+            window.location.href = 'home.html';
+        });
+    </script>
+</body>
+</html>
